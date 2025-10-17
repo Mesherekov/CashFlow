@@ -36,7 +36,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun App(rootComponent: RootComponent) {
     MaterialTheme {
         val childStack by rootComponent.childStack.subscribeAsState()
-
         Scaffold(
             bottomBar = {
                 BottomNavBar(
@@ -44,12 +43,12 @@ fun App(rootComponent: RootComponent) {
                         BottomNavItem(
                             stringResource(Res.string.home_bar),
                             vectorResource(Res.drawable.home),
-                            "home"
+                            RootComponent.Config.HomeScreen
                         ),
                         BottomNavItem(
                             stringResource(Res.string.person_bar),
                             vectorResource(Res.drawable.person),
-                            "person"
+                            RootComponent.Config.AccountScreen
                         )
                     ),
                     rootComponent = rootComponent

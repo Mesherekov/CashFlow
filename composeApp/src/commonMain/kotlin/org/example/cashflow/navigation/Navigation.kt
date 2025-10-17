@@ -8,6 +8,10 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -19,11 +23,12 @@ import androidx.compose.ui.unit.sp
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
+import com.arkivanov.decompose.router.stack.active
 
 data class BottomNavItem(
     val label: String,
     val icon: ImageVector,
-    val route:String,
+    val route: RootComponent.Config,
     val badgeCount: Int = 0
 )
 @Composable
@@ -38,11 +43,14 @@ fun BottomNavBar(
 
         tonalElevation = 5.dp
     ) {
+        var isSelected by remember { mutableStateOf(rootComponent.childStack.active.configuration) }
         items.forEach { item ->
-            val selected = rootComponent.getRoute() == item.route
+            val selected = isSelected == item.route
             NavigationBarItem(
                 selected = selected,
-                onClick = { rootComponent.navigateTo(item.route) },
+                onClick = { rootComponent.navigateTo(item.route)
+                          isSelected = rootComponent.childStack.active.configuration
+                          },
                 colors = NavigationBarItemDefaults.colors(
                     indicatorColor = Color(0xFFA4A4A4),
                     selectedIconColor = Color(0xFFFFFFFFF),

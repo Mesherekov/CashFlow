@@ -4,7 +4,9 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pushNew
+import com.arkivanov.decompose.router.stack.replaceCurrent
 import kotlinx.serialization.Serializable
+import org.example.cashflow.ui.HomeScreen
 
 class RootComponent(
     componentContext: ComponentContext
@@ -24,21 +26,15 @@ class RootComponent(
     ): Child {
         return when(config){
             is Config.AccountScreen -> Child.AccountScreen(
-                AccountScreenComponent(config.num, context)
+                AccountScreenComponent(context)
             )
             Config.HomeScreen -> Child.HomeScreen(
                 HomeScreenComponent(context)
             )
         }
     }
-   override fun navigateTo(route: String){
-       currentRoute = route
-        when(route){
-            "home" -> {
-                navigation.pushNew(Config.HomeScreen)
-            }
-            "person" -> navigation.pushNew(Config.AccountScreen(1))
-        }
+   override fun navigateTo(route: Config){
+       navigation.replaceCurrent(route)
     }
 
     override fun getRoute(): String {
@@ -58,6 +54,6 @@ class RootComponent(
         data object HomeScreen: Config()
 
         @Serializable
-        data class AccountScreen(val num: Int): Config()
+        data object AccountScreen: Config()
     }
 }

@@ -1,6 +1,10 @@
 package org.example.cashflow
 
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -21,7 +25,6 @@ import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
-import com.arkivanov.decompose.value.getValue
 import org.example.cashflow.navigation.BottomNavBar
 import org.example.cashflow.navigation.BottomNavItem
 import org.example.cashflow.navigation.RootComponent
@@ -56,17 +59,26 @@ fun App(rootComponent: RootComponent) {
                 )
             },
             floatingActionButton = {
-                FloatingActionButton(onClick = {},
-                    shape = CircleShape,
-                    containerColor = Color(0xFFF93737),
-                ){
-                    Icon(imageVector = vectorResource(Res.drawable.addi),
-                        contentDescription = "add",
-                        tint = Color(0xFFFFFFFFF),
-                        modifier = Modifier.scale(1.4f))
+                AnimatedVisibility(
+                    visible = childStack.active.configuration == RootComponent.Config.HomeScreen,
+                    enter = scaleIn(),
+                    exit = scaleOut(),
+                ) {
+                    FloatingActionButton(
+                        onClick = {},
+                        shape = CircleShape,
+                        containerColor = Color(0xFFF93737),
+                    ) {
+                        Icon(
+                            imageVector = vectorResource(Res.drawable.addi),
+                            contentDescription = "add",
+                            tint = Color(0xFFFFFFFFF),
+                            modifier = Modifier.scale(1.4f)
+                        )
+                    }
                 }
             }
-        ) {
+        ) { innerPadding ->
             Children(
                 stack = childStack,
                 animation = stackAnimation (slide())
@@ -74,7 +86,12 @@ fun App(rootComponent: RootComponent) {
                     child ->
                 when(val instance = child.instance){
                     is RootComponent.Child.AccountScreen -> AccountScreen(instance.component)
-                    is RootComponent.Child.HomeScreen -> HomeScreen(instance.component)
+                    is RootComponent.Child.HomeScreen -> {
+                        HomeScreen(instance.component,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(innerPadding))
+                    }
                 }
             }
 

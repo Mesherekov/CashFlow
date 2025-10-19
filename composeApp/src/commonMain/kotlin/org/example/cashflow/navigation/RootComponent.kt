@@ -3,10 +3,8 @@ package org.example.cashflow.navigation
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
-import com.arkivanov.decompose.router.stack.pushNew
 import com.arkivanov.decompose.router.stack.replaceCurrent
 import kotlinx.serialization.Serializable
-import org.example.cashflow.ui.HomeScreen
 
 class RootComponent(
     componentContext: ComponentContext

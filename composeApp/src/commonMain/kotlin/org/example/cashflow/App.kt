@@ -34,6 +34,9 @@ import org.example.cashflow.ui.HomeScreen
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.KoinContext
+import org.koin.compose.koinInject
+import org.koin.core.context.KoinContext
 
 @Composable
 @Preview

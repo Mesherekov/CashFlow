@@ -29,6 +29,7 @@ import org.example.cashflow.navigation.BottomNavBar
 import org.example.cashflow.navigation.BottomNavItem
 import org.example.cashflow.navigation.RootComponent
 import org.example.cashflow.ui.AccountScreen
+import org.example.cashflow.ui.ColorsUI
 import org.example.cashflow.ui.HomeScreen
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
@@ -67,7 +68,7 @@ fun App(rootComponent: RootComponent) {
                     FloatingActionButton(
                         onClick = {},
                         shape = CircleShape,
-                        containerColor = Color(0xFFF93737),
+                        containerColor = ColorsUI.light_blue,
                     ) {
                         Icon(
                             imageVector = vectorResource(Res.drawable.addi),

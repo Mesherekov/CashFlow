@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.arkivanov.decompose.router.stack.active
+import org.example.cashflow.ui.ColorsUI
 
 data class BottomNavItem(
     val label: String,
@@ -35,7 +36,7 @@ fun BottomNavBar(
 ){
     NavigationBar(
         modifier = modifier,
-        containerColor = Color(0xFFF93737),
+        containerColor = ColorsUI.light_blue,
 
         tonalElevation = 5.dp
     ) {
@@ -48,7 +49,7 @@ fun BottomNavBar(
                           isSelected = rootComponent.childStack.active.configuration
                           },
                 colors = NavigationBarItemDefaults.colors(
-                    indicatorColor = Color(0xFFA4A4A4),
+                    indicatorColor = ColorsUI.cian,
                     selectedIconColor = Color(0xFFFFFFFFF),
                     selectedTextColor = Color(0xFFFFFFFFF),
                     unselectedIconColor = Color(0xFFFFFFFFF),

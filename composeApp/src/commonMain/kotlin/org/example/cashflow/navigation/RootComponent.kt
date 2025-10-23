@@ -5,6 +5,7 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.replaceCurrent
 import kotlinx.serialization.Serializable
+import org.example.cashflow.navigation.interfaces.RootComponentPattern
 
 class RootComponent(
     componentContext: ComponentContext

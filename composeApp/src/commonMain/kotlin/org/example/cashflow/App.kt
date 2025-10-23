@@ -44,6 +44,7 @@ fun App(rootComponent: RootComponent) {
     MaterialTheme {
         val childStack by rootComponent.childStack.subscribeAsState()
         Scaffold(
+            contentColor = Color.White,
             bottomBar = {
                 BottomNavBar(
                     listOf(

@@ -1,4 +1,6 @@
 <resources>
     <string name="home_bar">Home</string>
     <string name="person_bar">Person</string>
+    <string name="enter_position">Enter the position</string>
+    <string name="enter_amount">Enter the amount</string>
 </resources>

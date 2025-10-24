@@ -1,6 +1,7 @@
 package org.example.cashflow.navigation
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -13,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -35,9 +37,9 @@ fun BottomNavBar(
     rootComponent: RootComponent
 ){
     NavigationBar(
-        modifier = modifier,
-        containerColor = ColorsUI.light_blue,
-
+        modifier = modifier
+            .clip(RoundedCornerShape(10.dp)),
+        containerColor = Color(0xFFE0F1EB),
         tonalElevation = 5.dp
     ) {
         var isSelected by remember { mutableStateOf(rootComponent.childStack.active.configuration) }
@@ -50,10 +52,10 @@ fun BottomNavBar(
                           },
                 colors = NavigationBarItemDefaults.colors(
                     indicatorColor = ColorsUI.cian,
-                    selectedIconColor = Color(0xFFFFFFFFF),
-                    selectedTextColor = Color(0xFFFFFFFFF),
-                    unselectedIconColor = Color(0xFFFFFFFFF),
-                    unselectedTextColor = Color(0xFFFFFFFFF)
+                    selectedIconColor = Color.White,
+                    selectedTextColor = Color.White,
+                    unselectedIconColor = Color.Gray,
+                    unselectedTextColor = Color.Gray
 
                 ),
                 icon = {

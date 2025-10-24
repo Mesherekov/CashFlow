@@ -29,8 +29,17 @@ fun HomeScreen(component: HomeScreenComponent,
 ){
     Box(modifier = modifier){
         Column {
+            DonutChart(
+                data = mapOf(
+                    Pair("Transport", 20),
+                    Pair("Home", 70),
+                    Pair("Food", 30),
+                    Pair("Shopping", 90),
+                    Pair("Games", 70)
+                )
+            )
             repeat(7){
-                WasteItem()
+                //WasteItem()
             }
         }
     }

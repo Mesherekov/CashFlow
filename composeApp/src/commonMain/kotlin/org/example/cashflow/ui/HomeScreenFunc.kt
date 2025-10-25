@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.example.cashflow.navigation.HomeScreenComponent
+import org.example.cashflow.ui.donut_chart.DonutChart
 
 
 @Composable
@@ -34,8 +35,9 @@ fun HomeScreen(component: HomeScreenComponent,
                     Pair("Transport", 20),
                     Pair("Home", 70),
                     Pair("Food", 30),
-                    Pair("Shopping", 90),
-                    Pair("Games", 70)
+                    Pair("Shopping", 200),
+                    Pair("Games", 70),
+                    Pair("Dance", 30),
                 )
             )
             repeat(7){

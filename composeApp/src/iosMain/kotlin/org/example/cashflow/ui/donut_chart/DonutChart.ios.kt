@@ -1,4 +1,4 @@
-package org.example.cashflow.ui
+package org.example.cashflow.ui.donut_chart
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope

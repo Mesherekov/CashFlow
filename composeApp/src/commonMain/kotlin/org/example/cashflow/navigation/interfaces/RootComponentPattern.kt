@@ -1,4 +1,6 @@
-package org.example.cashflow.navigation
+package org.example.cashflow.navigation.interfaces
+
+import org.example.cashflow.navigation.RootComponent
 
 interface RootComponentPattern {
     fun navigateTo(route: RootComponent.Config)

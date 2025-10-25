@@ -1,4 +1,17 @@
 <resources>
     <string name="home_bar">Главная</string>
     <string name="person_bar">Аккаунт</string>
+    <string name="enter_position">Введите позицию</string>
+    <string name="enter_amount">Введите сумму</string>
+
+    <string name="housing">Жилье</string>
+    <string name="transportation">Транспорт</string>
+    <string name="food">Еда и кафе</string>
+    <string name="shopping">Шопинг</string>
+    <string name="entertainment">Развлечения</string>
+    <string name="health">Здоровье</string>
+    <string name="bills">Счета</string>
+    <string name="travel">Путешествия</string>
+    <string name="personal">Личные траты</string>
+    <string name="other">Прочее</string>
 </resources>

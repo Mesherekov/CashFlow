@@ -1,7 +1,7 @@
 package org.example.cashflow.navigation
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -14,16 +14,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.arkivanov.decompose.extensions.compose.stack.Children
-import com.arkivanov.decompose.extensions.compose.stack.animation.slide
-import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import com.arkivanov.decompose.router.stack.active
+import org.example.cashflow.ui.ColorsUI
 
 data class BottomNavItem(
     val label: String,
@@ -38,9 +37,9 @@ fun BottomNavBar(
     rootComponent: RootComponent
 ){
     NavigationBar(
-        modifier = modifier,
-        containerColor = Color(0xFFF93737),
-
+        modifier = modifier
+            .clip(RoundedCornerShape(10.dp)),
+        containerColor = Color(0xFFE0F1EB),
         tonalElevation = 5.dp
     ) {
         var isSelected by remember { mutableStateOf(rootComponent.childStack.active.configuration) }
@@ -52,11 +51,11 @@ fun BottomNavBar(
                           isSelected = rootComponent.childStack.active.configuration
                           },
                 colors = NavigationBarItemDefaults.colors(
-                    indicatorColor = Color(0xFFA4A4A4),
-                    selectedIconColor = Color(0xFFFFFFFFF),
-                    selectedTextColor = Color(0xFFFFFFFFF),
-                    unselectedIconColor = Color(0xFFFFFFFFF),
-                    unselectedTextColor = Color(0xFFFFFFFFF)
+                    indicatorColor = ColorsUI.cian,
+                    selectedIconColor = Color.White,
+                    selectedTextColor = Color.White,
+                    unselectedIconColor = Color.Gray,
+                    unselectedTextColor = Color.Gray
 
                 ),
                 icon = {

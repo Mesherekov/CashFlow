@@ -72,7 +72,6 @@ fun DrawDonutChart(
                     )
                 }
             }
-
             lastValue += value
         }
     }

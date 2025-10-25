@@ -72,12 +72,12 @@ fun DonutChart(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(end = 3.dp),
+                .padding(10.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(
                 modifier = Modifier
-                    .size(animateSize.dp)
+                    .size(if (animationPlayed) animateSize.dp + 40.dp else animateSize.dp)
                     .clickable {
                         animationPlayed = !animationPlayed
                     },

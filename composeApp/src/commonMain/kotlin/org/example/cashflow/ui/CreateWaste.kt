@@ -14,7 +14,6 @@ import androidx.compose.material.icons.filled.Brush
 import androidx.compose.material.icons.filled.Camera
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Done
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -43,35 +42,36 @@ fun CreateWaste(){
             modifier = Modifier.fillMaxWidth(0.6f),
             elevation = CardDefaults.cardElevation(4.dp),
             colors = CardDefaults.cardColors(
-                containerColor = ColorsUI.light_blue
+                containerColor = Color(0xFFF93737)
             )
         ) {
-
-            Row(
+            Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(4.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                    .padding(3.dp)
             ) {
-                IconButton(onClick = {}){
-                    Icon(Icons.Default.Close,
-                        contentDescription = "close",
-                        tint = Color.White)
-                }
-                IconButton(onClick = {}){
-                    Icon(Icons.Default.Done,
-                        contentDescription = "done",
-                        tint = Color.White)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(4.dp),
+                    horizontalArrangement = Arrangement.SpaceAround
+                ) {
+                    IconButton(onClick = {}){
+                        Icon(Icons.Default.Close,
+                            contentDescription = "close")
+                    }
+                    IconButton(onClick = {}){
+                        Icon(Icons.Default.Done,
+                            contentDescription = "close")
+                    }
                 }
             }
-
             SingleChoiceSegmentedButton(
                 manually = {},
                 getPhoto = {},
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(3.dp)
-                
             )
         }
     }
@@ -85,7 +85,7 @@ fun SingleChoiceSegmentedButton(
     val selectedIndex = remember {
         mutableIntStateOf(0)
     }
-    val options = listOf(Icons.Default.Edit, Icons.Default.Camera) // Defines button icons
+    val options = listOf(Icons.Default.Brush, Icons.Default.Camera) // Defines button icons
     Column {
         SingleChoiceSegmentedButtonRow(modifier) {
             options.forEachIndexed { index, icon ->
@@ -101,12 +101,10 @@ fun SingleChoiceSegmentedButton(
                     label = { Icon(icon,
                         contentDescription = null) },
                     colors = SegmentedButtonDefaults.colors(
-                        activeContainerColor = ColorsUI.light_blue,
+                        activeContainerColor = Color(0xFF9F2222),
                         inactiveContainerColor = Color(0xFFA4A4A4),
                         activeContentColor = Color(0xFFF5F0FF),
-                        inactiveContentColor = Color.White,
-                        activeBorderColor = ColorsUI.cian,
-                        inactiveBorderColor = ColorsUI.cian
+                        inactiveContentColor = Color.White
                     )
                 )
             }

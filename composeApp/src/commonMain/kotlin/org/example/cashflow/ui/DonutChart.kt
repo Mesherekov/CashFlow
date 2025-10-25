@@ -30,11 +30,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlin.math.cos
+import kotlin.math.sin
 
 @Composable
 fun DonutChart(
@@ -43,6 +49,7 @@ fun DonutChart(
     chartBarWidth: Dp = 20.dp,
     animDuration: Int = 1000
 ){
+    val pi = 3.14159265358979323846
     val totalSum = data.values.sum()
     val floatValue = mutableListOf<Float>()
     data.values.forEachIndexed { index, item ->
@@ -115,6 +122,8 @@ fun DonutChart(
                         .size(radius * 2f)
                         .rotate(animateRotation),
                 ) {
+                    val chartRadius = size.minDimension
+                    val strokeWidth = 40.dp.toPx()
                     floatValue.forEachIndexed { index, value ->
                         drawArc(
                             color = colors[index],
@@ -126,6 +135,18 @@ fun DonutChart(
                                 cap = StrokeCap.Butt
                             )
                         )
+                        val middleAngle = lastValue + value/2
+                        val angleInRad = (middleAngle*pi/180).toFloat()
+                        val textRadius = chartRadius + strokeWidth * 0.7f
+                        val textX = center.x + textRadius * cos(angleInRad)
+                        val textY = center.y + textRadius * sin(angleInRad)
+                        drawTextItem(
+                            "wdw",
+                            textX,
+                            textY,
+                            Color.Black,
+                            16.sp
+                        )
                         lastValue += value
                     }
                 }
@@ -136,6 +157,13 @@ fun DonutChart(
 
 }
 
+expect fun DrawScope.drawTextItem(
+    text: String,
+    x: Float,
+    y: Float,
+    color: Color,
+    textSize: TextUnit
+)
 @Composable
 fun DetailsDonutChart(
     data: Map<String, Int>,

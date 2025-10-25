@@ -13,8 +13,8 @@ object ColorsUI {
     val light_cian = Color(0xFFA4F3DA)
 
     val color10 = Color(0xFFE6F5F4)  // 10% от исходного
-    val color30 = Color(0xFFB3E0DE)  // 30% от исходного
-    val color50 = Color(0xFF80CBC8)  // 50% от исходного
-    val color70 = Color(0xFF4DB6B2)  // 70% от исходного
-    val color90 = Color(0xFF1A9F9A)
+    val color30 = Color(0xFF699E8D)  // 30% от исходного
+    val color50 = Color(0xFF66E8D)  // 50% от исходного
+    val color70 = Color(0xFF375249)  // 70% от исходного
+    val color90 = Color(0xFF5A8578)
 }

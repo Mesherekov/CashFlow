@@ -19,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -54,7 +53,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun App(rootComponent: RootComponent) {
     MaterialTheme {
         val childStack by rootComponent.childStack.subscribeAsState()
-        var isCreating by remember { mutableStateOf(false) }
+        val isCreating = remember { mutableStateOf(false) }
         Box(Modifier
             .background(Brush
                 .verticalGradient(0f to ColorsUI.backgroundColor,
@@ -94,7 +93,7 @@ fun App(rootComponent: RootComponent) {
                 ) {
                     FloatingActionButton(
                         onClick = {
-                            isCreating = true
+                            isCreating.value = true
                         },
                         shape = CircleShape,
                         containerColor = ColorsUI.cian,
@@ -125,11 +124,11 @@ fun App(rootComponent: RootComponent) {
                     }
                 }
             }
-            if (isCreating){
+            if (isCreating.value){
                 Box(modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ){
-                    CreateWaste()
+                    CreateWaste(isCreating)
                 }
             }
         }

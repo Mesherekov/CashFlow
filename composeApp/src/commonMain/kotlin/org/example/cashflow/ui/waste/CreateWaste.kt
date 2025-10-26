@@ -19,6 +19,7 @@ import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,7 +33,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview(showBackground = true)
 @Composable
-fun CreateWaste(){
+fun CreateWaste(isCreating: MutableState<Boolean>) {
     Card(
         modifier = Modifier
         .fillMaxWidth(0.7f),
@@ -49,7 +50,9 @@ fun CreateWaste(){
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 IconButton(
-                    onClick = {},
+                    onClick = {
+                        isCreating.value = false
+                    },
 
                     ) {
                     Icon(
@@ -62,7 +65,9 @@ fun CreateWaste(){
                     contentAlignment = Alignment.CenterEnd
                 ) {
                     IconButton(
-                        onClick = {},
+                        onClick = {
+                            isCreating.value = false
+                        },
                     ) {
                         Icon(
                             Icons.Default.Done,

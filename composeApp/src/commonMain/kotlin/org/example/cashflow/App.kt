@@ -50,7 +50,7 @@ fun App(rootComponent: RootComponent) {
         val childStack by rootComponent.childStack.subscribeAsState()
         Box(Modifier
             .background(Brush
-                .verticalGradient(0f to Color(0xFFB1DDCE),
+                .verticalGradient(0f to ColorsUI.backgroundColor,
                     1000f to Color.White))){
         Scaffold(
             containerColor = Color.Transparent,

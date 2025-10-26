@@ -13,4 +13,5 @@ object ColorsUI {
     val light_cian = Color(0xFFA4F3DA)
 
     val backgroundColor = Color(0xFFB1DDCE)
+
 }

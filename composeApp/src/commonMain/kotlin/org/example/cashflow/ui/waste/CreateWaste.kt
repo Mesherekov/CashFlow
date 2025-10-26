@@ -74,7 +74,7 @@ fun CreateWaste(){
             }
             SingleChoiceButton(
                 onEdit = {
-
+                    EditItem()
                 },
                 byCamera = {},
 
@@ -124,3 +124,5 @@ fun SingleChoiceButton(
         }
     }
 }
+
+expect val myLang:String?

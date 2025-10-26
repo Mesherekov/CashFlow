@@ -9,7 +9,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Sort
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.AttachMoney
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -45,17 +44,23 @@ fun OnEditWaste(){
 fun EditItem(){
 
     val wasteCategories = WasteCategories.entries.toTypedArray()
+    val currency = Currency.entries.toTypedArray()
+
     var isMenuCheck by remember { mutableStateOf(false) }
     val rotation = remember { Animatable(initialValue = 1f) }
     var selectWaste by remember { mutableStateOf(Icons.AutoMirrored.Filled.Sort) }
-    var wasteInput by remember { mutableStateOf("") }
+    var selectCurrency by remember { if (myLang == "ru") mutableStateOf(Currency.Ruble.icon)
+    else mutableStateOf(Currency.Dollar.icon) }
 
+    var wasteInput by remember { mutableStateOf("") }
+    var isCurrencyCheck by remember { mutableStateOf(false) }
 
     LaunchedEffect(isMenuCheck) {
         rotation.animateTo(
             targetValue = if (isMenuCheck) 180f else 1f
         )
     }
+
     DropdownMenu(
         expanded = isMenuCheck,
         onDismissRequest = {
@@ -82,7 +87,7 @@ fun EditItem(){
 
     Row(modifier = Modifier
         .fillMaxWidth()
-        .padding(3.dp),
+        .padding(7.dp),
         verticalAlignment = Alignment.CenterVertically) {
         IconButton(onClick = {
             isMenuCheck = !isMenuCheck
@@ -96,7 +101,8 @@ fun EditItem(){
         }
         Icon(
             selectWaste,
-            contentDescription = "select_waste"
+            contentDescription = "select_waste",
+            Modifier.padding(2.dp)
         )
         Box(
             modifier = Modifier.weight(1f),
@@ -116,15 +122,40 @@ fun EditItem(){
                     if (wasteInput.length <= 8 || it.length < 10)
                         wasteInput = it },
                trailingIcon = {
-                   IconButton(onClick = {}) {
+                   IconButton(onClick = {
+                       isCurrencyCheck = !isCurrencyCheck
+                   }) {
                        Icon(
-                           Icons.Default.AttachMoney,
+                           selectCurrency,
                            contentDescription = "money",
                            tint = Color.Black
                        )
                    }},
                 label = {Text(stringResource(Res.string.label_money))},
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            )
+        }
+    }
+    DropdownMenu(
+        expanded = isCurrencyCheck,
+        onDismissRequest = {
+            isCurrencyCheck = false
+        },
+        containerColor = Color(0xFFCCFFF7)
+    ) {
+        currency.forEach {
+            DropdownMenuItem(
+                onClick = {
+                    isCurrencyCheck = false
+                    selectCurrency = it.icon
+                },
+                leadingIcon = {
+                    Icon(
+                        it.icon,
+                        contentDescription = it.name.lowercase()
+                    )
+                },
+                text = { Text(it.name) }
             )
         }
     }

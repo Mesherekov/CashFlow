@@ -25,6 +25,7 @@ fun HomeScreen(component: HomeScreenComponent,
 ){
     val wasteCategories = WasteCategories.entries.toTypedArray()
     Box(modifier = modifier){
+
         Column {
             DonutChart(
                 data = mapOf(

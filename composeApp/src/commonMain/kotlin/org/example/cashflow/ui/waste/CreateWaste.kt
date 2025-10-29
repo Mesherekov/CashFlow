@@ -79,7 +79,7 @@ fun CreateWaste(isCreating: MutableState<Boolean>) {
             }
             SingleChoiceButton(
                 onEdit = {
-                    EditItem()
+                    OnEditWaste()
                 },
                 byCamera = {},
 

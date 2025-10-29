@@ -1,18 +1,26 @@
 package org.example.cashflow.ui.waste
 
 import androidx.compose.animation.core.Animatable
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Sort
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -24,7 +32,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -35,9 +45,39 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
+@Preview(showBackground = true)
 @Composable
 fun OnEditWaste(){
-
+    var wasteList by remember { mutableStateOf(
+        1) }
+    LazyColumn {
+       items(wasteList){
+           EditItem()
+       }
+        item {
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.CenterEnd
+            ){
+                IconButton(
+                    onClick = {
+                        wasteList++
+                    },
+                    modifier = Modifier
+                        .padding(4.dp)
+                        .clip(RectangleShape),
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = ColorsUI.light_cian
+                    )
+                ){
+                    Icon(
+                        Icons.Default.Add,
+                        contentDescription = "add_waste"
+                        )
+                }
+            }
+        }
+    }
 }
 @Preview(showBackground = true)
 @Composable

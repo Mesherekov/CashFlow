@@ -110,7 +110,10 @@ fun App(rootComponent: RootComponent) {
                 animation = stackAnimation(slide())
             ) { child ->
                 when (val instance = child.instance) {
-                    is RootComponent.Child.AccountScreen -> AccountScreen(instance.component)
+                    is RootComponent.Child.AccountScreen -> AccountScreen(instance.component,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(innerPadding))
                     is RootComponent.Child.HomeScreen -> {
                         HomeScreen(
                             instance.component,

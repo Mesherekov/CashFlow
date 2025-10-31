@@ -2,17 +2,21 @@ package org.example.cashflow.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.example.cashflow.db.WasteItemDB
 import org.example.cashflow.navigation.HomeScreenComponent
 import org.example.cashflow.ui.donut_chart.DonutChart
+import org.example.cashflow.ui.waste.CreateWaste
 import org.example.cashflow.ui.waste.WasteCategories
 import org.example.cashflow.ui.waste.WasteItem
 import org.jetbrains.compose.resources.stringResource
@@ -20,8 +24,10 @@ import org.jetbrains.compose.resources.stringResource
 
 
 @Composable
-fun HomeScreen(component: HomeScreenComponent,
-               modifier: Modifier = Modifier.fillMaxWidth()
+fun HomeScreen(
+    component: HomeScreenComponent,
+    modifier: Modifier = Modifier.fillMaxWidth(),
+    isCreating: MutableState<Boolean>
 ){
     val wasteCategories = WasteCategories.entries.toTypedArray()
     Box(modifier = modifier){
@@ -55,6 +61,14 @@ fun HomeScreen(component: HomeScreenComponent,
                 }
             }
         }
+        if (isCreating.value){
+            Box(modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ){
+                CreateWaste(isCreating)
+            }
+        }
     }
+
 }
 

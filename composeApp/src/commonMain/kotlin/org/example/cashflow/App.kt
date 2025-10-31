@@ -5,7 +5,6 @@ import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
@@ -19,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
@@ -43,7 +41,6 @@ import org.example.cashflow.navigation.RootComponent
 import org.example.cashflow.ui.AccountScreen
 import org.example.cashflow.ui.ColorsUI
 import org.example.cashflow.ui.HomeScreen
-import org.example.cashflow.ui.waste.CreateWaste
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -119,18 +116,13 @@ fun App(rootComponent: RootComponent) {
                             instance.component,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(innerPadding)
+                                .padding(innerPadding),
+                            isCreating
                         )
                     }
                 }
             }
-            if (isCreating.value){
-                Box(modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ){
-                    CreateWaste(isCreating)
-                }
-            }
+
         }
 
         }

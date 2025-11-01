@@ -1,6 +1,7 @@
 package org.example.cashflow.ui.donut_chart
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -30,10 +31,11 @@ fun DrawDonutChart(
     var lastValue = 0f
     Canvas(
         modifier = Modifier
+            .padding(30.dp)
             .size(radius * 2f)
             .rotate(animateRotation),
     ) {
-        val chartRadius = size.minDimension
+        val chartRadius = size.minDimension// - 35
         val strokeWidth = 40.dp.toPx()
         floatValue.forEachIndexed { index, value ->
             drawArc(
@@ -63,8 +65,10 @@ fun DrawDonutChart(
                 pivot = Offset(textX, textY)
             ) {
                 if (animationPlayed) {
+                    val text = data.keys.elementAt(index)
+
                     drawTextItem(
-                        data.keys.elementAt(index),
+                        text,
                         textX,
                         textY,
                         Color.Black,

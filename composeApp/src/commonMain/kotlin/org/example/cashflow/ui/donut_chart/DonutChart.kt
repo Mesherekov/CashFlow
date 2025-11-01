@@ -28,7 +28,7 @@ fun DonutChart(
     data: Map<String, Int>,
     radius: Dp = 90.dp,
     chartBarWidth: Dp = 20.dp,
-    animDuration: Int = 1000
+    animDuration: Int = 600
 ){
     val totalSum = data.values.sum()
     val floatValue = mutableListOf<Float>()

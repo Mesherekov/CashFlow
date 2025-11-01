@@ -13,8 +13,10 @@ actual fun DrawScope.drawTextItem(
     color: Color,
     textSize: TextUnit
 ) {
+
     drawContext.canvas.nativeCanvas.apply {
         drawText(
+
             text,
             x,
             y,

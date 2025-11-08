@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class WasteItem(
+data class Waste(
     val cost: String,
     val listWasteCategories: String,
     @PrimaryKey val id: Int = 0,

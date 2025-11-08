@@ -16,6 +16,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
@@ -48,9 +50,10 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun App(rootComponent: RootComponent) {
     MaterialTheme {
         val childStack by rootComponent.childStack.subscribeAsState()
+        val isCreating = remember { mutableStateOf(false) }
         Box(Modifier
             .background(Brush
-                .verticalGradient(0f to Color(0xFFB1DDCE),
+                .verticalGradient(0f to ColorsUI.backgroundColor,
                     1000f to Color.White))){
         Scaffold(
             containerColor = Color.Transparent,
@@ -86,7 +89,9 @@ fun App(rootComponent: RootComponent) {
                     exit = scaleOut(),
                 ) {
                     FloatingActionButton(
-                        onClick = {},
+                        onClick = {
+                            isCreating.value = true
+                        },
                         shape = CircleShape,
                         containerColor = ColorsUI.cian,
                     ) {
@@ -105,17 +110,22 @@ fun App(rootComponent: RootComponent) {
                 animation = stackAnimation(slide())
             ) { child ->
                 when (val instance = child.instance) {
-                    is RootComponent.Child.AccountScreen -> AccountScreen(instance.component)
+                    is RootComponent.Child.AccountScreen -> AccountScreen(instance.component,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(innerPadding))
                     is RootComponent.Child.HomeScreen -> {
                         HomeScreen(
                             instance.component,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(innerPadding)
+                                .padding(innerPadding),
+                            isCreating
                         )
                     }
                 }
             }
+
         }
 
         }

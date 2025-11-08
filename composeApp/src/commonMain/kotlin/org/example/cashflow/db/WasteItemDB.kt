@@ -1,6 +1,7 @@
 package org.example.cashflow.db
 
-import org.example.cashflow.ui.waste.WasteCategories
+import org.example.cashflow.db.WasteCategories
+
 
 data class WasteItemDB(
     val wasteCategory: WasteCategories,

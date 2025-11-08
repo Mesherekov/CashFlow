@@ -6,12 +6,15 @@
 
     <string name="housing">Housing</string>
     <string name="transportation">Transportation</string>
-    <string name="food">Food &amp; Dining</string>
+    <string name="food">Food</string>
     <string name="shopping">Shopping</string>
     <string name="entertainment">Entertainment</string>
-    <string name="health">Health &amp; Wellness</string>
-    <string name="bills">Bills &amp; Utilities</string>
+    <string name="health">Health</string>
+    <string name="bills">Bills</string>
     <string name="travel">Travel</string>
     <string name="personal">Personal</string>
     <string name="other">Other</string>
+
+    <string name="label_money">Enter the amount</string>
+
 </resources>

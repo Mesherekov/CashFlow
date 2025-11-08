@@ -1,4 +1,4 @@
-package org.example.cashflow.ui.waste
+package org.example.cashflow.db
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.AltRoute
@@ -24,7 +24,6 @@ import cashflow.composeapp.generated.resources.shopping
 import cashflow.composeapp.generated.resources.transportation
 import cashflow.composeapp.generated.resources.travel
 import org.jetbrains.compose.resources.StringResource
-
 
 enum class WasteCategories(val title: StringResource, val icon: ImageVector) {
     Housing(Res.string.housing, Icons.Default.House),

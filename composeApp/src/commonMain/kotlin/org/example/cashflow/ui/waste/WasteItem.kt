@@ -2,6 +2,7 @@ package org.example.cashflow.ui.waste
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,10 +29,12 @@ import kotlin.math.round
 @Preview(showBackground = true)
 @Composable
 fun WasteItem(wasteItem: WasteItemDB){
+    Column{
     Row(modifier = Modifier
         .fillMaxWidth()
         .padding(8.dp)) {
-        Icon(imageVector = wasteItem.wasteCategory.icon,
+        Icon(
+            imageVector = wasteItem.wasteCategory.icon,
             contentDescription = wasteItem.wasteCategory
                 .name
                 .lowercase(),
@@ -38,15 +42,17 @@ fun WasteItem(wasteItem: WasteItemDB){
                 .size(32.dp)
                 .clip(CircleShape)
                 .background(Color.LightGray),
-            )
+        )
         Spacer(Modifier.width(10.dp))
         Text(
             text = stringResource(wasteItem.wasteCategory.title),
             fontSize = 19.sp
         )
-        Box(modifier = Modifier
-            .weight(1f),
-            contentAlignment = Alignment.CenterEnd) {
+        Box(
+            modifier = Modifier
+                .weight(1f),
+            contentAlignment = Alignment.CenterEnd
+        ) {
             Text(
                 text = "$${
                     wasteItem
@@ -59,6 +65,8 @@ fun WasteItem(wasteItem: WasteItemDB){
                     .padding(3.dp)
             )
         }
+    }
+        HorizontalDivider(color = Color.LightGray)
     }
 }
 fun Double.roundTo(dec: Int): Double {

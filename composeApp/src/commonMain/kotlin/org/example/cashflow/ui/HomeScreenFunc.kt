@@ -65,7 +65,9 @@ fun HomeScreen(
             Box(modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ){
-                CreateWaste(isCreating)
+                CreateWaste(
+                    onDismiss = {isCreating.value = false}
+                )
             }
         }
     }

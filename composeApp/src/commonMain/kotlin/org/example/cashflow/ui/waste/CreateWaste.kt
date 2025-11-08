@@ -33,7 +33,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview(showBackground = true)
 @Composable
-fun CreateWaste(isCreating: MutableState<Boolean>) {
+fun CreateWaste(
+    onDismiss: () -> Unit
+) {
     Card(
         modifier = Modifier
         .fillMaxWidth(0.7f),
@@ -51,7 +53,7 @@ fun CreateWaste(isCreating: MutableState<Boolean>) {
             ) {
                 IconButton(
                     onClick = {
-                        isCreating.value = false
+                        onDismiss
                     },
 
                     ) {
@@ -66,7 +68,7 @@ fun CreateWaste(isCreating: MutableState<Boolean>) {
                 ) {
                     IconButton(
                         onClick = {
-                            isCreating.value = false
+                            onDismiss
                         },
                     ) {
                         Icon(

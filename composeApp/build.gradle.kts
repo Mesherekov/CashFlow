@@ -1,3 +1,4 @@
+import com.google.devtools.ksp.gradle.KspExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -6,6 +7,8 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
 }
 
 kotlin {
@@ -31,6 +34,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
+          //  implementation(libs.coil.network.okhttp)
 
         }
         commonMain.dependencies {
@@ -46,14 +50,21 @@ kotlin {
             implementation(libs.kermit)
             implementation(libs.decompose)
             implementation(libs.decompose.extensions.compose)
-            implementation(libs.coil3.coil)
+            /*implementation(libs.coil3.coil)
             implementation(libs.coil.compose)
-            implementation(libs.coil.network.okhttp)
+            implementation(libs.coil.network)*/
             api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.lifecycle.viewmodel)
+
+           implementation(libs.room.runtime)
+            implementation(libs.sqlite.bundled)
+            implementation(libs.sqlite)
         }
+//        iosMain.dependencies {
+//            implementation(libs.coil.network)
+//        }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
@@ -87,7 +98,16 @@ android {
     }
 }
 
+room {
+    schemaDirectory("$projectDir/schemas")
+}
+
 dependencies {
     debugImplementation(compose.uiTooling)
+    ksp(libs.room.compiler)
+    add("kspAndroid", libs.room.compiler)
+    add("kspIosArm64", libs.room.compiler)
+    add("kspIosSimulatorArm64", libs.room.compiler)
+
 }
 

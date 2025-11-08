@@ -8,7 +8,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.room)
+    alias(libs.plugins.androidx.room)
 }
 
 kotlin {
@@ -34,6 +34,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
+            implementation(libs.androidx.room.sqlite.wrapper)
           //  implementation(libs.coil.network.okhttp)
 
         }
@@ -57,10 +58,9 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.lifecycle.viewmodel)
+            implementation(libs.androidx.room.runtime)
+            implementation(libs.androidx.sqlite.bundled)
 
-           implementation(libs.room.runtime)
-            implementation(libs.sqlite.bundled)
-            implementation(libs.sqlite)
         }
 //        iosMain.dependencies {
 //            implementation(libs.coil.network)
@@ -104,10 +104,11 @@ room {
 
 dependencies {
     debugImplementation(compose.uiTooling)
-    ksp(libs.room.compiler)
-    add("kspAndroid", libs.room.compiler)
-    add("kspIosArm64", libs.room.compiler)
-    add("kspIosSimulatorArm64", libs.room.compiler)
+    ksp(libs.androidx.room.compiler)
+    add("kspAndroid", libs.androidx.room.compiler)
+    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
+    //add("kspIosX64", libs.androidx.room.compiler)
+    add("kspIosArm64", libs.androidx.room.compiler)
 
 }
 

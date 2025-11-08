@@ -17,7 +17,7 @@ import org.example.cashflow.db.WasteItemDB
 import org.example.cashflow.navigation.HomeScreenComponent
 import org.example.cashflow.ui.donut_chart.DonutChart
 import org.example.cashflow.ui.waste.CreateWaste
-import org.example.cashflow.ui.waste.WasteCategories
+import org.example.cashflow.db.WasteCategories
 import org.example.cashflow.ui.waste.WasteItem
 import org.jetbrains.compose.resources.stringResource
 

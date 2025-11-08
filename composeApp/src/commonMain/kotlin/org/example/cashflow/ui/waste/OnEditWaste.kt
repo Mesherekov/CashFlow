@@ -40,6 +40,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import cashflow.composeapp.generated.resources.Res
 import cashflow.composeapp.generated.resources.label_money
+import org.example.cashflow.db.WasteCategories
 import org.example.cashflow.ui.ColorsUI
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview

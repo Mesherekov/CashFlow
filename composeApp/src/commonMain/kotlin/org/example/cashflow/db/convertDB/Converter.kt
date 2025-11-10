@@ -20,4 +20,21 @@ class Converter(val waste: Waste) {
             .currency.split("#")
             .map { wasteCurrency[it] }
     }
+    companion object{
+        fun convertToString(listWaste: List<WasteCategories>): String{
+            var convertedList = listWaste.first().name
+            listWaste.forEach {
+                convertedList += "#" + it.name
+            }
+            return convertedList
+        }
+        fun convertToString(listCurrency: List<Currency>): String{
+            var convertedList = listCurrency.first().name
+            listCurrency.forEach {
+                convertedList += "#" + it.name
+            }
+            return convertedList
+        }
+    }
+
 }

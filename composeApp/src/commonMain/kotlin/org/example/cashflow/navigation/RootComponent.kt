@@ -5,10 +5,12 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.replaceCurrent
 import kotlinx.serialization.Serializable
+import org.example.cashflow.db.WasteDatabase
 import org.example.cashflow.navigation.interfaces.RootComponentPattern
 
 class RootComponent(
-    componentContext: ComponentContext
+    componentContext: ComponentContext,
+    val wasteDatabase: WasteDatabase
 ): ComponentContext by componentContext, RootComponentPattern {
     private val navigation = StackNavigation<Config>()
     val childStack = childStack(
@@ -28,7 +30,8 @@ class RootComponent(
                 AccountScreenComponent(context)
             )
             Config.HomeScreen -> Child.HomeScreen(
-                HomeScreenComponent(context)
+                HomeScreenComponent(context,
+                    wasteDatabase)
             )
         }
     }

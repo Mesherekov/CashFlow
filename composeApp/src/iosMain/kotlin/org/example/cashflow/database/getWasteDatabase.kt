@@ -11,6 +11,7 @@ fun getWasteDatabase(): WasteDatabase {
         name = dbFile,
         factory = { WasteDatabase::class.instantiateImpl()}
     )
+        .fallbackToDestructiveMigration(false)
         .setDriver(BundledSQLiteDriver())
         .build()
 }

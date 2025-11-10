@@ -5,8 +5,10 @@ package org.example.cashflow.di
 import android.content.Context
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.retainedComponent
+import org.example.cashflow.database.getWasteDatabase
 import org.example.cashflow.navigation.RootComponent
 import org.koin.core.module.Module
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 actual interface PlatformComponentContext {
@@ -19,9 +21,10 @@ class AndroidComponentContext(
 
 actual val platformModule = module {
     single { (componentContext: ComponentContext) ->
-        RootComponent(componentContext)
+        RootComponent(componentContext, get())
     }
     factory<PlatformComponentContext> { (context: Context) ->
         AndroidComponentContext(context)
     }
+    singleOf(::getWasteDatabase)
 }

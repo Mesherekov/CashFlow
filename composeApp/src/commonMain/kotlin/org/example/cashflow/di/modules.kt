@@ -12,6 +12,7 @@ import org.koin.dsl.module
 expect interface PlatformComponentContext
 val sharedModule = module {
     singleOf(::RootComponent).bind< RootComponentPattern>()
+
 }
 
 expect val platformModule: Module

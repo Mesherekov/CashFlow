@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [Waste::class],
-    version = 1
+    version = 2
 )
 abstract class WasteDatabase: RoomDatabase() {
     abstract fun wasteDao(): WasteDao

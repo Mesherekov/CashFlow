@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface WasteDao {
     @Query("SELECT * FROM  waste")
-    suspend fun getAllWaste(): Flow<List<Waste>>
+    fun getAllWaste(): Flow<List<Waste>>
     @Upsert
     suspend fun upsert(waste: Waste)
 

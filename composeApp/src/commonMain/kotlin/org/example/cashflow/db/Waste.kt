@@ -3,11 +3,12 @@ package org.example.cashflow.db
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "waste")
 data class Waste(
     val cost: String,
     val listWasteCategories: String,
-    @PrimaryKey val id: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int? = null,
     val currency: String,
     val date: String
-    )
+)

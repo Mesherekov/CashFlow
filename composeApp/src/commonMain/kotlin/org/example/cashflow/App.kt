@@ -15,9 +15,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
@@ -35,6 +37,10 @@ import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+import org.example.cashflow.db.WasteDao
 import org.example.cashflow.navigation.BottomNavBar
 import org.example.cashflow.navigation.BottomNavItem
 import org.example.cashflow.navigation.RootComponent
@@ -47,8 +53,11 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 @Preview
-fun App(rootComponent: RootComponent) {
+fun App(rootComponent: RootComponent,
+        wasteDao: WasteDao) {
     MaterialTheme {
+        val waste by wasteDao.getAllWaste().collectAsState(emptyList())
+        val scope = rememberCoroutineScope()
         val childStack by rootComponent.childStack.subscribeAsState()
         val isCreating = remember { mutableStateOf(false) }
         Box(Modifier

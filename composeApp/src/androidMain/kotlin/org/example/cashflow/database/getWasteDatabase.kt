@@ -11,6 +11,7 @@ fun getWasteDatabase(context: Context): WasteDatabase{
         context.applicationContext,
         dbFile.absolutePath,
     )
+        .fallbackToDestructiveMigration(false)
         .setDriver(BundledSQLiteDriver())
         .build()
 }

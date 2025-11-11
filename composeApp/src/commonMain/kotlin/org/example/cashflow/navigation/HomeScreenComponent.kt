@@ -1,6 +1,7 @@
 package org.example.cashflow.navigation
 
 import androidx.compose.runtime.LaunchedEffect
+import co.touchlab.kermit.Logger
 import com.arkivanov.decompose.ComponentContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

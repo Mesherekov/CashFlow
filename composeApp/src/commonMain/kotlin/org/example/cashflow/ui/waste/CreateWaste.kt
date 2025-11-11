@@ -28,13 +28,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import org.example.cashflow.db.WasteCard
 import org.example.cashflow.ui.ColorsUI
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview(showBackground = true)
 @Composable
 fun CreateWaste(
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
+    onCreate: (wasteCard: WasteCard) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -53,7 +55,7 @@ fun CreateWaste(
             ) {
                 IconButton(
                     onClick = {
-                        onDismiss
+                        onDismiss()
                     },
 
                     ) {
@@ -68,7 +70,8 @@ fun CreateWaste(
                 ) {
                     IconButton(
                         onClick = {
-                            onDismiss
+                            onDismiss()
+
                         },
                     ) {
                         Icon(

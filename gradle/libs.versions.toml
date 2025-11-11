@@ -19,6 +19,7 @@ kotlin = "2.2.20"
 decompose = "3.4.0"
 koin = "4.1.1"
 koinComposeMultiplatform = "4.1.1"
+kotlinxSerializationJson = "1.9.0"
 lifecycleViewModel = "2.9.4"
 kspVersion = "2.2.20-2.0.4"
 room = "2.8.3"
@@ -51,6 +52,7 @@ decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decom
 decompose-extensions-compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
 androidx-lifecycle-viewmodelCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewModel"}
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }

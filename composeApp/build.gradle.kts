@@ -1,6 +1,9 @@
 import com.google.devtools.ksp.gradle.KspExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
+
+
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
@@ -51,6 +54,7 @@ kotlin {
             implementation(compose.materialIconsExtended)
             implementation(libs.kermit)
             implementation(libs.decompose)
+            implementation(libs.kotlinx.serialization.json)
             implementation(libs.decompose.extensions.compose)
             /*implementation(libs.coil3.coil)
             implementation(libs.coil.compose)

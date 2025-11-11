@@ -18,6 +18,7 @@ import org.example.cashflow.navigation.HomeScreenComponent
 import org.example.cashflow.ui.donut_chart.DonutChart
 import org.example.cashflow.ui.waste.CreateWaste
 import org.example.cashflow.db.WasteCategories
+import org.example.cashflow.ui.waste.Currency
 import org.example.cashflow.ui.waste.WasteItem
 import org.jetbrains.compose.resources.stringResource
 
@@ -55,7 +56,8 @@ fun HomeScreen(
                     WasteItem(
                         WasteItemDB(
                             wasteCategories[i],
-                            (i * 1.4 + 1 * 13*1.5).toFloat()
+                            (i * 1.4 + 1 * 13*1.5).toFloat(),
+                            Currency.Ruble
                         )
                     )
                 }
@@ -66,7 +68,10 @@ fun HomeScreen(
                 contentAlignment = Alignment.Center
             ){
                 CreateWaste(
-                    onDismiss = {isCreating.value = false}
+                    onDismiss = {isCreating.value = false},
+                    onCreate = {
+                        
+                    }
                 )
             }
         }

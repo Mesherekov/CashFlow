@@ -53,17 +53,21 @@ fun WasteItem(wasteItem: WasteItemDB){
                 .weight(1f),
             contentAlignment = Alignment.CenterEnd
         ) {
-            Text(
-                text = "$${
-                    wasteItem
-                        .cost
-                        .toDouble()
-                        .roundTo(2)
-                }",
-                fontSize = 22.sp,
-                modifier = Modifier
-                    .padding(3.dp)
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(wasteItem.currency.icon,
+                    contentDescription = "currency")
+                Text(
+                    text = "${
+                        wasteItem
+                            .cost
+                            .toDouble()
+                            .roundTo(2)
+                    }",
+                    fontSize = 22.sp,
+                    modifier = Modifier
+                        .padding(3.dp)
+                )
+            }
         }
     }
         HorizontalDivider(color = Color.LightGray)

@@ -89,7 +89,9 @@ fun CreateWaste(
             }
             SingleChoiceButton(
                 onEdit = {
-                    OnEditWaste()
+                    OnEditWaste{wasteList ->
+                        wasteCard.value.copy(listWaste = wasteList)
+                    }
                 },
                 byCamera = {},
 

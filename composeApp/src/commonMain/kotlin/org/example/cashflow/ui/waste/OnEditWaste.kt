@@ -1,19 +1,14 @@
 package org.example.cashflow.ui.waste
 
 import androidx.compose.animation.core.Animatable
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Sort
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.DropdownMenu
@@ -27,6 +22,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -41,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import cashflow.composeapp.generated.resources.Res
 import cashflow.composeapp.generated.resources.label_money
 import org.example.cashflow.db.WasteCategories
+import org.example.cashflow.db.WasteItemDB
 import org.example.cashflow.ui.ColorsUI
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -48,12 +45,19 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview(showBackground = true)
 @Composable
-fun OnEditWaste(){
-    var wasteList by remember { mutableStateOf(
-        1) }
+fun OnEditWaste(returnList: (wasteList: List<WasteItemDB>)-> Unit){
+    val wasteList = remember { mutableStateListOf(WasteItemDB(
+        WasteCategories.Other,
+        0f,
+        Currency.Ruble
+    )) }
     LazyColumn {
-       items(wasteList){
-           EditItem()
+       itemsIndexed(wasteList){ index, _ ->
+           EditItem{ cost, currency, wasteCategories ->
+               wasteList[index] = WasteItemDB(wasteCategories,
+                   cost,
+                   currency)
+           }
        }
         item {
             Box(
@@ -62,7 +66,12 @@ fun OnEditWaste(){
             ){
                 IconButton(
                     onClick = {
-                        wasteList++
+                        returnList(wasteList)
+                        wasteList.add(WasteItemDB(
+                            WasteCategories.Other,
+                            0f,
+                            Currency.Ruble
+                            ))
                     },
                     modifier = Modifier
                         .padding(4.dp)
@@ -82,17 +91,20 @@ fun OnEditWaste(){
 }
 @Preview(showBackground = true)
 @Composable
-fun EditItem(){
+fun EditItem(onCreateItem: (
+        cost: Float,
+        currency: Currency,
+        wasteCategories: WasteCategories
+        ) -> Unit) {
 
     val wasteCategories = WasteCategories.entries.toTypedArray()
     val currency = Currency.entries.toTypedArray()
 
     var isMenuCheck by remember { mutableStateOf(false) }
     val rotation = remember { Animatable(initialValue = 1f) }
-    var selectWaste by remember { mutableStateOf(Icons.AutoMirrored.Filled.Sort) }
-    var selectCurrency by remember { if (myLang == "ru") mutableStateOf(Currency.Ruble.icon)
-    else mutableStateOf(Currency.Dollar.icon) }
-
+    var selectWaste by remember { mutableStateOf(WasteCategories.Other) }
+    var selectCurrency by remember { if (myLang == "ru") mutableStateOf(Currency.Ruble)
+    else mutableStateOf(Currency.Dollar) }
     var wasteInput by remember { mutableStateOf("") }
     var isCurrencyCheck by remember { mutableStateOf(false) }
 
@@ -113,7 +125,11 @@ fun EditItem(){
             DropdownMenuItem(
                 onClick = {
                     isMenuCheck = false
-                    selectWaste = it.icon
+                    selectWaste = it
+                    onCreateItem(if (wasteInput!="")wasteInput.toFloat() else 0f,
+                        selectCurrency,
+                        selectWaste
+                    )
                 },
                 leadingIcon = {
                     Icon(
@@ -141,7 +157,7 @@ fun EditItem(){
                 )
         }
         Icon(
-            selectWaste,
+            selectWaste.icon,
             contentDescription = "select_waste",
             Modifier.padding(2.dp)
         )
@@ -160,14 +176,19 @@ fun EditItem(){
                 ),
                 value = wasteInput,
                 onValueChange = {
-                    if (wasteInput.length <= 8 || it.length < 10)
-                        wasteInput = it },
+                    if (wasteInput.length <= 8 || it.length < 10) {
+                        wasteInput = it
+                        onCreateItem(if (wasteInput!="")wasteInput.toFloat() else 0f,
+                            selectCurrency,
+                            selectWaste
+                        )
+                    } },
                trailingIcon = {
                    IconButton(onClick = {
                        isCurrencyCheck = !isCurrencyCheck
                    }) {
                        Icon(
-                           selectCurrency,
+                           selectCurrency.icon,
                            contentDescription = "money",
                            tint = Color.Black
                        )
@@ -188,7 +209,11 @@ fun EditItem(){
             DropdownMenuItem(
                 onClick = {
                     isCurrencyCheck = false
-                    selectCurrency = it.icon
+                    selectCurrency = it
+                    onCreateItem(if (wasteInput!="")wasteInput.toFloat() else 0f,
+                        selectCurrency,
+                        selectWaste
+                        )
                 },
                 leadingIcon = {
                     Icon(

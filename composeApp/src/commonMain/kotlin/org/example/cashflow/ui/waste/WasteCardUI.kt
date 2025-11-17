@@ -10,15 +10,15 @@ import org.example.cashflow.db.WasteItemDB
 
 @Composable
 fun WasteCard(wasteCard: WasteCard){
-    if (wasteCard.cost.size>1){
+    if (wasteCard.listWaste.size>1){
         Card(elevation = CardDefaults.elevatedCardElevation(3.dp)) {
             Column {
-                wasteCard.cost.forEachIndexed { index, value ->
+                wasteCard.listWaste.forEachIndexed { index, value ->
                     WasteItem(
                         WasteItemDB(
-                            wasteCard.listWasteCategories[index],
-                            value,
-                            wasteCard.currency[index]
+                            value.wasteCategory,
+                            value.cost,
+                            value.currency
                         )
                     )
                 }
@@ -26,11 +26,12 @@ fun WasteCard(wasteCard: WasteCard){
         }
     }else{
         Card(elevation = CardDefaults.elevatedCardElevation(3.dp)) {
+            val wasteFirst = wasteCard.listWaste.first()
             WasteItem(
                 WasteItemDB(
-                    wasteCard.listWasteCategories.first(),
-                    wasteCard.cost.first(),
-                    wasteCard.currency.first()
+                    wasteFirst.wasteCategory,
+                    wasteFirst.cost,
+                    wasteFirst.currency
                 )
             )
         }

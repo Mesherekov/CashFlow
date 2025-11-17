@@ -38,6 +38,11 @@ fun CreateWaste(
     onDismiss: () -> Unit,
     onCreate: (wasteCard: WasteCard) -> Unit
 ) {
+    val wasteCard = remember {
+        mutableStateOf(WasteCard(
+            emptyList(),
+            ""))
+    }
     Card(
         modifier = Modifier
         .fillMaxWidth(0.7f),
@@ -71,7 +76,7 @@ fun CreateWaste(
                     IconButton(
                         onClick = {
                             onDismiss()
-
+                            onCreate(wasteCard.value)
                         },
                     ) {
                         Icon(

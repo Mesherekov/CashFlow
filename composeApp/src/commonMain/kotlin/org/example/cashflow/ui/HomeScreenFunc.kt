@@ -14,10 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.example.cashflow.db.WasteItemDB
-import org.example.cashflow.navigation.HomeScreenComponent
+import org.example.cashflow.viewmodels.HomeScreenComponent
 import org.example.cashflow.ui.donut_chart.DonutChart
 import org.example.cashflow.ui.waste.CreateWaste
 import org.example.cashflow.db.WasteCategories
+import org.example.cashflow.db.convertDB.Converter
 import org.example.cashflow.ui.waste.Currency
 import org.example.cashflow.ui.waste.WasteItem
 import org.jetbrains.compose.resources.stringResource
@@ -70,7 +71,9 @@ fun HomeScreen(
                 CreateWaste(
                     onDismiss = {isCreating.value = false},
                     onCreate = {
-                        
+                        component.updateWaste(
+                            Converter.convertWasteCard(it)
+                        )
                     }
                 )
             }

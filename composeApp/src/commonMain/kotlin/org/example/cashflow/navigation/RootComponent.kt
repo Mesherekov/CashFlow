@@ -7,6 +7,8 @@ import com.arkivanov.decompose.router.stack.replaceCurrent
 import kotlinx.serialization.Serializable
 import org.example.cashflow.db.WasteDatabase
 import org.example.cashflow.navigation.interfaces.RootComponentPattern
+import org.example.cashflow.viewmodels.AccountScreenComponent
+import org.example.cashflow.viewmodels.HomeScreenComponent
 
 class RootComponent(
     componentContext: ComponentContext,
@@ -30,8 +32,10 @@ class RootComponent(
                 AccountScreenComponent(context)
             )
             Config.HomeScreen -> Child.HomeScreen(
-                HomeScreenComponent(context,
-                    wasteDatabase)
+                HomeScreenComponent(
+                    context,
+                    wasteDatabase
+                )
             )
         }
     }

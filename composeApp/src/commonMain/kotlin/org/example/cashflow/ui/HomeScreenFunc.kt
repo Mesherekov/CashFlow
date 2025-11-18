@@ -9,10 +9,13 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import co.touchlab.kermit.Logger
+import org.example.cashflow.db.Waste
 import org.example.cashflow.db.WasteItemDB
 import org.example.cashflow.ui.donut_chart.DonutChart
 import org.example.cashflow.ui.waste.CreateWaste

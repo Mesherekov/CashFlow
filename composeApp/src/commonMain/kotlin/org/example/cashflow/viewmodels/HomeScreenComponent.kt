@@ -22,7 +22,7 @@ class HomeScreenComponent(
 ): ComponentContext by componentContext, HomeComponent {
     private val _stateFlowWaste = MutableStateFlow<List<WasteItemDB>>(emptyList())
     val itemsState: StateFlow<List<WasteItemDB>> = _stateFlowWaste.asStateFlow()
-    private val listWaste = wasteDatabase.wasteDao().getAllWaste()
+
     override fun createWaste(wasteCard: WasteCard) {
         CoroutineScope(Dispatchers.IO).launch {
             wasteDatabase.wasteDao().upsert(
@@ -32,7 +32,7 @@ class HomeScreenComponent(
     }
 
     override fun getWastes(): Flow<List<Waste>> {
-       return listWaste
+       return wasteDatabase.wasteDao().getAllWaste()
     }
 
 

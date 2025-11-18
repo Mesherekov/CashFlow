@@ -58,6 +58,7 @@ fun OnEditWaste(returnList: (wasteList: List<WasteItemDB>)-> Unit){
                wasteList[index] = WasteItemDB(wasteCategories,
                    cost,
                    currency)
+               returnList(wasteList)
            }
        }
         item {

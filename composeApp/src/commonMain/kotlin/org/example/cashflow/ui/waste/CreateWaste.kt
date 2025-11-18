@@ -19,7 +19,6 @@ import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,16 +27,30 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.todayIn
 import org.example.cashflow.db.WasteCard
 import org.example.cashflow.ui.ColorsUI
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
+@OptIn(ExperimentalTime::class)
 @Preview(showBackground = true)
 @Composable
 fun CreateWaste(
     onDismiss: () -> Unit,
     onCreate: (wasteCard: WasteCard) -> Unit
 ) {
+    val date = Clock.System.todayIn(TimeZone.currentSystemDefault())
+    val dateFormat = LocalDate.Format {
+        day()
+        chars(".")
+        monthNumber()
+        chars(".")
+        year()
+    }
     val wasteCard = remember {
         mutableStateOf(WasteCard(
             emptyList(),
@@ -90,7 +103,10 @@ fun CreateWaste(
             SingleChoiceButton(
                 onEdit = {
                     OnEditWaste{wasteList ->
-                        wasteCard.value.copy(listWaste = wasteList)
+                        wasteCard.value = WasteCard(
+                            listWaste = wasteList,
+                            date = dateFormat.format(date)
+                            )
                     }
                 },
                 byCamera = {},

@@ -1,7 +1,4 @@
-import com.google.devtools.ksp.gradle.KspExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
-
 
 
 plugins {
@@ -65,7 +62,7 @@ kotlin {
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.androidx.room.runtime)
             implementation(libs.androidx.sqlite.bundled)
-
+            implementation(libs.kotlinx.datetime.v071)
         }
 //        iosMain.dependencies {
 //            implementation(libs.coil.network)

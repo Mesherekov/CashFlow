@@ -21,7 +21,6 @@ import org.example.cashflow.ui.waste.Currency
 import org.example.cashflow.ui.waste.WasteItem
 import org.example.cashflow.viewmodels.HomeScreenComponent
 import org.jetbrains.compose.resources.stringResource
-import org.koin.compose.koinInject
 
 
 @Composable

@@ -15,8 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import org.example.cashflow.db.Waste
-import org.example.cashflow.db.WasteCard
 import org.example.cashflow.db.WasteCategories
 import org.example.cashflow.db.WasteItemDB
 import org.example.cashflow.db.convertDB.Converter
@@ -36,7 +34,7 @@ fun HomeScreen(
 ){
 
     val wastes by component.getWastes().collectAsState(initial = emptyList())
-    val wasteCards = convertWaste(wastes)
+    val wasteCards = Converter.convertWaste(wastes)
     val wasteCategories = WasteCategories.entries.toTypedArray()
     Box(modifier = modifier){
 
@@ -86,27 +84,3 @@ fun HomeScreen(
 
 }
 
-fun convertWaste(wasteList: List<Waste>): List<WasteCard>{
-    val wasteCardList = mutableListOf<WasteCard>()
-    wasteList.forEach {
-        val converter = Converter(it)
-        val cost = converter.getListCost()
-        val currency = converter.getListCurrency()
-        val waste = converter.getListWaste()
-       val wasteItemList = cost
-           .zip(waste)
-           .zip(currency) { (a, b), c ->
-               Triple(a, b, c)}
-        val wasteItemDBList = mutableListOf<WasteItemDB>()
-        wasteItemList.forEach { value -> wasteItemDBList.add(
-            WasteItemDB(cost = value.first,
-           wasteCategory =  value.second ?: WasteCategories.Other,
-           currency =  value.third ?: Currency.Dollar)) }
-        wasteCardList.add(
-            WasteCard(wasteItemDBList,
-                it.date
-                )
-        )
-    }
-    return wasteCardList
-}

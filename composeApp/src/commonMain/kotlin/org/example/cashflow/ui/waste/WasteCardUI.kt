@@ -1,6 +1,8 @@
 package org.example.cashflow.ui.waste
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
@@ -12,8 +14,8 @@ import org.example.cashflow.db.WasteItemDB
 fun WasteCard(wasteCard: WasteCard){
     if (wasteCard.listWaste.size>1){
         Card(elevation = CardDefaults.elevatedCardElevation(3.dp)) {
-            Column {
-                wasteCard.listWaste.forEachIndexed { index, value ->
+            LazyColumn {
+                itemsIndexed(wasteCard.listWaste){_, value ->
                     WasteItem(
                         WasteItemDB(
                             value.wasteCategory,
@@ -22,6 +24,8 @@ fun WasteCard(wasteCard: WasteCard){
                         )
                     )
                 }
+
+
             }
         }
     }else{

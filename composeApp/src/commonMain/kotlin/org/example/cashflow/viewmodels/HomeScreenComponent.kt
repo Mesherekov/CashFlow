@@ -14,6 +14,7 @@ import org.example.cashflow.db.WasteCard
 import org.example.cashflow.db.WasteDatabase
 import org.example.cashflow.db.convertDB.Converter
 import org.example.cashflow.viewmodels.interfaces.HomeComponent
+import org.jetbrains.compose.resources.StringResource
 
 class HomeScreenComponent(
     componentContext: ComponentContext,
@@ -52,6 +53,18 @@ class HomeScreenComponent(
 
     }
 
+    override fun statisticsWaste(listWasteCard: List<WasteCard>): List<Pair<StringResource, Float>> {
+        val statistics = mutableListOf<Pair<StringResource, Float>>()
+        val sumWastes = mutableListOf<Float>()
+        listWasteCard.forEach {
+            sumWastes.add(
+                it.listWaste.sumOf {
+                    item -> item.cost.toDouble()
+                }.toFloat()
+            )
+        }
+        return emptyList()
+    }
 
 
 }

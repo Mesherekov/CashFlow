@@ -31,24 +31,30 @@ class Converter(private val waste: Waste) {
         @TypeConverter
         fun convertWaste(listWaste: List<WasteCategories>): String{
             var convertedList = listWaste.first().name
-            listWaste.forEach {
-                convertedList += "#" + it.name
+            if (listWaste.size>1) {
+                listWaste.subList(1, listWaste.size - 1).forEach {
+                    convertedList += "#" + it.name
+                }
             }
             return convertedList
         }
         @TypeConverter
         fun convertCurrency(listCurrency: List<Currency>): String{
             var convertedList = listCurrency.first().name
-            listCurrency.forEach {
-                convertedList += "#" + it.name
+            if (listCurrency.size>1) {
+                listCurrency.subList(1, listCurrency.size - 1).forEach {
+                    convertedList += "#" + it.name
+                }
             }
             return convertedList
         }
         @TypeConverter
         fun convertCost(listCost: List<Float>): String{
             var convertedList = listCost.first().toString()
-            listCost.forEach {
-                convertedList += "#$it"
+            if (listCost.size>1) {
+                listCost.subList(1, listCost.size - 1).forEach {
+                    convertedList += "#$it"
+                }
             }
             return convertedList
         }

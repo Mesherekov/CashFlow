@@ -12,16 +12,16 @@ import kotlinx.coroutines.launch
 import org.example.cashflow.db.Waste
 import org.example.cashflow.db.WasteCard
 import org.example.cashflow.db.WasteDatabase
-import org.example.cashflow.db.WasteItemDB
 import org.example.cashflow.db.convertDB.Converter
 import org.example.cashflow.viewmodels.interfaces.HomeComponent
+import org.jetbrains.compose.resources.StringResource
 
 class HomeScreenComponent(
     componentContext: ComponentContext,
     val wasteDatabase: WasteDatabase
 ): ComponentContext by componentContext, HomeComponent {
-    private val _stateFlowWaste = MutableStateFlow<List<WasteItemDB>>(emptyList())
-    val itemsState: StateFlow<List<WasteItemDB>> = _stateFlowWaste.asStateFlow()
+    private val _stateFlowWaste = MutableStateFlow<List<Waste>>(emptyList())
+    val itemsState: StateFlow<List<Waste>> = _stateFlowWaste.asStateFlow()
 
     override fun createWaste(wasteCard: WasteCard) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -53,6 +53,18 @@ class HomeScreenComponent(
 
     }
 
+    override fun statisticsWaste(listWasteCard: List<WasteCard>): List<Pair<StringResource, Float>> {
+        val statistics = mutableListOf<Pair<StringResource, Float>>()
+        val sumWastes = mutableListOf<Float>()
+        listWasteCard.forEach {
+            sumWastes.add(
+                it.listWaste.sumOf {
+                    item -> item.cost.toDouble()
+                }.toFloat()
+            )
+        }
+        return emptyList()
+    }
 
 
 }

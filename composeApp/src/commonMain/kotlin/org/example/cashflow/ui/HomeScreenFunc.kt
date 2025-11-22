@@ -5,23 +5,25 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import co.touchlab.kermit.Logger
-import org.example.cashflow.db.Waste
-import org.example.cashflow.db.WasteItemDB
+import org.example.cashflow.db.WasteCategories
+import org.example.cashflow.db.convertDB.Converter
 import org.example.cashflow.ui.donut_chart.DonutChart
 import org.example.cashflow.ui.waste.CreateWaste
-import org.example.cashflow.db.WasteCategories
-import org.example.cashflow.ui.waste.Currency
-import org.example.cashflow.ui.waste.WasteItem
+import org.example.cashflow.ui.waste.WasteCard
 import org.example.cashflow.viewmodels.HomeScreenComponent
 import org.jetbrains.compose.resources.stringResource
 
@@ -32,6 +34,10 @@ fun HomeScreen(
     modifier: Modifier = Modifier.fillMaxWidth(),
     isCreating: MutableState<Boolean>
 ){
+
+    val wastes by component.getWastes().collectAsState(initial = emptyList())
+    val wasteCards = Converter
+        .convertWaste(wastes)
     val wasteCategories = WasteCategories.entries.toTypedArray()
     Box(modifier = modifier){
 
@@ -54,14 +60,10 @@ fun HomeScreen(
                     containerColor = Color.White
                 )
                 ) {
-                for (i in 0..5) {
-                    WasteItem(
-                        WasteItemDB(
-                            wasteCategories[i],
-                            (i * 1.4 + 1 * 13*1.5).toFloat(),
-                            Currency.Ruble
-                        )
-                    )
+                LazyColumn {
+                    itemsIndexed(wasteCards){_, value ->
+                        WasteCard(value)
+                    }
                 }
             }
         }

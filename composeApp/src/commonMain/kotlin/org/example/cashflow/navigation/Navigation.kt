@@ -28,7 +28,6 @@ data class BottomNavItem(
     val label: String,
     val icon: ImageVector,
     val route: RootComponent.Config,
-    val badgeCount: Int = 0
 )
 @Composable
 fun BottomNavBar(

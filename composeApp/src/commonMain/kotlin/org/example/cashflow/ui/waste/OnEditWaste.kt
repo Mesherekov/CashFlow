@@ -47,7 +47,8 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun OnEditWaste(returnList: (wasteList: List<WasteItemDB>)-> Unit){
 
-    val wasteList = remember { mutableStateListOf(WasteItemDB(
+    val wasteList = remember {
+        mutableStateListOf(WasteItemDB(
         WasteCategories.Other,
         0f,
         Currency.Ruble

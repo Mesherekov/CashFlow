@@ -35,7 +35,8 @@ kotlin {
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
             implementation(libs.androidx.room.sqlite.wrapper)
-          //  implementation(libs.coil.network.okhttp)
+            implementation(libs.ktor.client.android)
+            //  implementation(libs.coil.network.okhttp)
 
         }
         commonMain.dependencies {
@@ -56,6 +57,7 @@ kotlin {
             /*implementation(libs.coil3.coil)
             implementation(libs.coil.compose)
             implementation(libs.coil.network)*/
+            implementation(libs.ktor.client.core)
             api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
@@ -64,9 +66,10 @@ kotlin {
             implementation(libs.androidx.sqlite.bundled)
             implementation(libs.kotlinx.datetime.v071)
         }
-//        iosMain.dependencies {
-//            implementation(libs.coil.network)
-//        }
+        iosMain.dependencies {
+            //implementation(libs.coil.network)
+            implementation(libs.ktor.client.darwin)
+        }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
